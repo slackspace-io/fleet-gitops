@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: influxdb-ingress
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    traefik.ingress.kubernetes.io/router.middlewares: default-authentik@kubernetescrd
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+      - influxdb.slack.house # replace with your domain name
+      secretName: slack-house-tls-secret
+  rules:
+    - host: influxdb.slack.house # replace with your domain name
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: influxdb
+                port:
+                  number: 8086

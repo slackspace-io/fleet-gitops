@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+#statefulset
+kind: StatefulSet
+metadata:
+  labels:
+    app: influxdb
+  name: influxdb
+  namespace: influxdb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: influxdb
+  serviceName: influxdb
+  template:
+    metadata:
+      labels:
+        app: influxdb
+    spec:
+      containers:
+        - name: influxdb
+          image: quay.io/influxdb/influxdb:v2.0.9
+          ports:
+            - containerPort: 8086
+#          env:
+#            - name: INFLUXDB_REPORTING_DISABLED
+#              value: "true"
+          volumeMounts:
+            - mountPath: /root/.influxdbv2
+              name: influxdb-data
+          resources:
+            requests:
+              memory: "2048Mi"
+              cpu: "1"
+            limits:
+              memory: "3072Mi"
+              cpu: "2"
+      nodeSelector:
+        generic: "true"
+      volumes:
+        - name: influxdb-data
+          persistentVolumeClaim:
+            claimName: influxdb-pvc
