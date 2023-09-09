@@ -1,1 +1,2 @@
 influxdb slack-house-tls-secret
+home-assistant slack-house-tls-secret
