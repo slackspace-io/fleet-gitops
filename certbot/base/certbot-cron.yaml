@@ -1,0 +1,38 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: certbot
+spec:
+  suspend: true
+  schedule: "0 0 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: certbot
+            image: certbot/dns-google
+            args:
+            - "certonly"
+            - "--dns-google"
+            - "--dns-google-credentials=/etc/certbot/google/key.json"
+            - "--dns-google-propagation-seconds=60"
+            - "--non-interactive"
+            - "--agree-tos"
+            - "--email=certs@slackspace.io"
+            - "-d"
+            - "*.slack.house"
+            volumeMounts:
+            - name: letsencrypt
+              mountPath: /etc/letsencrypt
+            - name: google-dns-key
+              mountPath: /etc/certbot/google
+              readOnly: true
+          restartPolicy: OnFailure
+          volumes:
+          - name: letsencrypt
+            persistentVolumeClaim:
+              claimName: letsencrypt
+          - name: google-dns-key
+            secret:
+              secretName: certbot-google-dns

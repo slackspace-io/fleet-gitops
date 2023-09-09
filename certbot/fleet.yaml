@@ -1,0 +1,3 @@
+defaultNamespace: certbot
+kustomize:
+  dir: ./base

@@ -1,0 +1,8 @@
+helm:
+    releaseName: traefik
+    chart: traefik
+    repo: https://traefik.github.io/charts
+    force: true
+    version: 24.0.0
+    valuesFiles:
+        - values.yaml
