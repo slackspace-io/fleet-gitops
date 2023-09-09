@@ -28,6 +28,8 @@ spec:
           volumeMounts:
             - mountPath: /root/.influxdbv2
               name: influxdb-data
+            - mountPath: /backup
+              name: influxdb-backup
           resources:
             requests:
               memory: "2048Mi"
@@ -38,6 +40,10 @@ spec:
       nodeSelector:
         generic: "true"
       volumes:
+        - name: influxdb-backup
+          nfs:
+            server: 10.21.20.20
+            path: /volume1/k8s-backup
         - name: influxdb-data
           persistentVolumeClaim:
             claimName: influxdb-pvc
