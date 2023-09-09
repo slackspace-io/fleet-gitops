@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mosquitto
+spec:
+  serviceName: mosquitto
+  selector:
+    matchLabels:
+      app: mosquitto
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mosquitto
+    spec:
+      containers:
+        - name: mosquitto
+          image: eclipse-mosquitto:latest
+          ports:
+            - containerPort: 1883
+              name: mqtt
+            - containerPort: 9001
+              name: mqtt-websockets
+          volumeMounts:
+            - name: mosquitto-config
+              mountPath: /mosquitto/config/mosquitto.conf
+              subPath: mosquitto.conf
+            - name: mosquitto-data
+              mountPath: /mosquitto/data
+      volumes:
+        - name: mosquitto-config
+          configMap:
+            name: mosquitto-config
+        - name: mosquitto-data
+          persistentVolumeClaim:
+            claimName: mosquitto-pvc
+      nodeSelector:
+        generic: "true"
+

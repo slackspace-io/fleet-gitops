@@ -1,0 +1,5 @@
+resources:
+  - persistent_volumes.yaml
+  - config_map.yaml
+  - deployment.yaml
+  - service.yaml
