@@ -34,6 +34,4 @@ spec:
         - name: mosquitto-data
           persistentVolumeClaim:
             claimName: mosquitto-pvc
-      nodeSelector:
-        generic: "true"
 
