@@ -5,3 +5,4 @@ trillium slack-house-tls-secret
 vikunja slack-house-tls-secret
 esphome slack-house-tls-secret
 default slack-house-tls-secret
+grafana slack-house-tls-secret
