@@ -4,3 +4,4 @@ zigbee2mqtt slack-house-tls-secret
 trillium slack-house-tls-secret
 vikunja slack-house-tls-secret
 esphome slack-house-tls-secret
+default slack-house-tls-secret
