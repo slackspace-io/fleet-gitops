@@ -1,2 +1,3 @@
 influxdb slack-house-tls-secret
 home-assistant slack-house-tls-secret
+zigbee2mqtt slack-house-tls-secret
