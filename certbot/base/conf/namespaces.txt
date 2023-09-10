@@ -1,3 +1,6 @@
 influxdb slack-house-tls-secret
 home-assistant slack-house-tls-secret
 zigbee2mqtt slack-house-tls-secret
+trillium slack-house-tls-secret
+vikunja slack-house-tls-secret
+esphome slack-house-tls-secret
