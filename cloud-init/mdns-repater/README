@@ -1,0 +1,7 @@
+I use this on Harvester v1.2, but confirmed working on harvester v1.1.x
+
+I use the Jammy cloud image.
+
+This installs docker, launches mdn-repeater on the configured interfaces.
+
+This uses the docker image from https://github.com/monstrenyatko/docker-mdns-repeater.

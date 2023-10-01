@@ -1,0 +1,26 @@
+#cloud-config
+system_info:
+  default_user:
+    name: changeme
+password: changeme
+chpasswd:
+  expire: False
+packages:
+  - docker.io
+  - qemu-guest-agent
+
+runcmd:
+  - docker pull monstrenyatko/mdns-repeater
+  - - systemctl
+    - enable
+    - --now
+    - qemu-guest-agent.service
+  - docker run -d --name mdns-repeater --restart always --network host
+    monstrenyatko/mdns-repeater mdns-repeater-app -f enp1s0 enp2s0 enp3s0
+
+ssh_authorized_keys:
+  - >
+    ssh-rsa #yourkey
+package_update: true
+
+
